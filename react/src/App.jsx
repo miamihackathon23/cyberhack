@@ -1,4 +1,4 @@
-import './index.css';
+import './styles.css';
 import FileUpload from './FileUpload.jsx';
 
 function App() {

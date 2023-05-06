@@ -6,6 +6,14 @@ body {
   padding: 50px;
 }
 
+header {
+  text-align: center;
+  font-size: 4em;
+  margin-top: 50px;
+  color: #9f0fed;
+  text-shadow: 0px 0px 20px #9f0fed;
+}
+
 h1 {
   text-align: center;
   font-size: 4em;
@@ -23,12 +31,14 @@ form {
 
 label {
   font-size: 1.8em;
+  font-family: 'Roboto Mono', monospace;
   margin-bottom: 20px;
   color: #e96d5e;
   text-shadow: 0px 0px 10px #e96d5e;
 }
 
 input[type="file"] {
+  font-family: 'Roboto Mono', monospace;
   padding: 15px;
   border: 3px solid #ff9760;
   border-radius: 10px;
@@ -40,6 +50,7 @@ input[type="file"] {
 }
 
 button[type="submit"] {
+  font-family: 'Roboto Mono', monospace;
   padding: 15px 30px;
   background-color: #6a7e6a;
   color: #1f1f1f;
@@ -53,6 +64,11 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #6a7e6a;
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.24),0 5px 10px 0 rgba(0,0,0,0.19);
+}
+
+button, input {
+  font-family: 'Roboto Mono', monospace
 }
 
 #result {
