@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from myapp.views import main
+from myapp import process_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main, name="main"),
+    path('/detect_fraud', process_data.detect_fraud),
+    path('/result', process_data.get_results),
 ]

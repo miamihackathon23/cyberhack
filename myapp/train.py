@@ -44,3 +44,4 @@ Xtrain_prediction = model.predict(X_train)
 training_accuracy = accuracy_score(Xtrain_prediction, Y_train)
 
 print("Accuracy score:", training_accuracy)
+

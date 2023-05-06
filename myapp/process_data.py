@@ -4,8 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-import manage as m
-
+from .train import m
 
 # load the trained model
 m.model.fit(m.X_train, m.Y_train)
@@ -14,10 +13,17 @@ m.model.fit(m.X_train, m.Y_train)
 app = Flask(__name__)
 
 # create an API endpoint
+@app.route('/result', methods=['GET'])
+
+def get_results(): 
+    output = detect_fraud()
+    return output
+
 @app.route('/detect_fraud', methods=['POST'])
 def detect_fraud():
     # get the input data from the request
-    input_data = request.json['input']
+    # input_data = request.json['input']
+    input_data = pd.read_csv['input']
     
     # process the input data using the model
     input_arr = np.array(input_data).reshape(1, -1)

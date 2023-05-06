@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const FileUpload = () => {
   function detectFraud(input) {
@@ -10,11 +11,24 @@ const FileUpload = () => {
   const resultDiv = document.querySelector("#result");
 
   const [file, setFile] = useState();
+  const [result, setResult] = useState();
   const fileReader = new FileReader();
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
-};
+  };
+
+  const postData = () => {
+    axios.post('/detect_fraud', file);
+  }
+
+  const getResult = () => {
+    axios.get('/results')
+      .then((response) => {
+        setResult(response)
+      })
+  }
+
 
 
   const onSubmit = (e) => {
@@ -30,6 +44,9 @@ const FileUpload = () => {
           const csvData = fileReader.result;
           const dataArray = csvData.split("\n").map((row) => row.split(","));
           const input = dataArray[0].map((value) => parseFloat(value));
+          postData(input);
+          
+
           const isFraudulent = detectFraud(input);
           if (isFraudulent) {
             resultDiv.innerText = "Potentially fraudulent behavior detected!";
