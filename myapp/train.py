@@ -5,37 +5,37 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 #load data set to data frame 
-cc_data = pd.read_csv("/Users/sofianadramia/cuberv2/creditcard 3.csv")
+cc_data = pd.read_csv("/Users/sofianadramia/hackathon/hackathon/cyberhack/TrainingData2.2.csv")
 
 print(cc_data.head())\
 
 #seperating data 
-not_fraud = cc_data[cc_data.Class == 0]
-fraud = cc_data[cc_data.Class == 1]
-#print(fraud.shape)
+not_fraud = cc_data[cc_data.fraud_bool == 0]
+fraud = cc_data[cc_data.fraud_bool == 1]
+print(fraud.shape)
 
 #data stats 
 #print(fraud.Amount.describe())
 
 #splitting data into features and targets 
 
-x = cc_data.drop(columns='Class', axis=1)
-y = cc_data['Class']
-#print(x)
+x = cc_data.drop(columns='fraud_bool', axis=1)
+y = cc_data['fraud_bool']
+print(x)
 
 #build sample dataset containing normal dist for fraud and not fraud
 #generate randomsample of non fraud data 
-real_sample = not_fraud.sample(n= 492)
+real_sample = not_fraud.sample(n= 43000)
 #combine both sets
 new_dataset = pd.concat((real_sample, fraud), axis=0 )
-newX = new_dataset.drop(columns='Class', axis=1)
-newY = new_dataset['Class']
+newX = new_dataset.drop(columns='fraud_bool', axis=1)
+newY = new_dataset['fraud_bool']
 
 #split training and testing data 
 X_train, X_test, Y_train, Y_test = train_test_split(newX, newY, test_size=0.2, stratify=newY, random_state=2)
 
 #train model 
-model = LogisticRegression()
+model = LogisticRegression(max_iter=1000000)
 model.fit(X_train, Y_train)
 #print(newX.shape, X_test.shape, X_train.shape)
 
