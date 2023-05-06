@@ -4,22 +4,41 @@ body {
   color: #ffe69d;
   font-size: 1.5em;
   padding: 50px;
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, grey 1px, transparent 1px),
+    linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
 header {
   text-align: center;
   font-size: 4em;
   margin-top: 50px;
-  color: #9f0fed;
-  text-shadow: 0px 0px 20px #9f0fed;
+  margin-bottom: 50px;
+  color: white;
+  text-shadow: 0px 0px 20px #3821e6;
 }
 
 h1 {
   text-align: center;
   font-size: 4em;
   margin-top: 50px;
-  color: #e96d5e;
-  text-shadow: 0px 0px 20px #e96d5e;
+  color: #ea9187;
+  text-shadow: 0px 0px 15px #e96d5e;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(227, 81, 232, 0.7);
+  padding-top: 35px;
+  padding-bottom: 35px;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: absolute;
 }
 
 form {
@@ -33,7 +52,7 @@ label {
   font-size: 1.8em;
   font-family: 'Roboto Mono', monospace;
   margin-bottom: 20px;
-  color: #e96d5e;
+  color: #e7a29b;
   text-shadow: 0px 0px 10px #e96d5e;
 }
 
@@ -68,7 +87,8 @@ button[type="submit"]:hover {
 }
 
 button, input {
-  font-family: 'Roboto Mono', monospace
+  font-family: 'Roboto Mono', monospace;
+  max-width: 750px;
 }
 
 #result {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const FileUpload = () => {
   function detectFraud(input) {
@@ -49,8 +49,8 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="App">
-      <header>CYBERVIGILANTE</header>
+    <>
+      <header>CYBER VIGILANTE</header>
 
       <form id="file-upload">
         <label for="csv-file">Upload CSV File:</label>
@@ -58,7 +58,7 @@ const FileUpload = () => {
         <button onSubmit={ (e) => onSubmit(e)} type="submit" id="submit-btn">Submit</button>
       </form>
       <div id="result"></div>
-    </div>
+    </>
   );
 
 }

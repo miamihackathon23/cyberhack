@@ -3,7 +3,9 @@ import FileUpload from './FileUpload.jsx';
 
 function App() {
   return (
-    <FileUpload />
+    <div class='app'>
+      <div class='overlay'><FileUpload /></div>
+    </div>
   );
 }
 
