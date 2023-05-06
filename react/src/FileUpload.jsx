@@ -16,54 +16,61 @@ const FileUpload = () => {
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
+    console.log('e.target.files[0]', e.target.files[0])
   };
 
-  const postData = () => {
-    axios.post('/detect_fraud', file);
+  const postData = (input) => {
+    axios.post('/detect_fraud', input);
   }
 
-  const getResult = () => {
-    axios.get('/results')
-      .then((response) => {
-        setResult(response)
-      })
-  }
+  // const getResult = () => {
+  //   axios.get('/results')
+  //     .then((response) => {
+  //       setResult(response)
+  //     })
+  // }
 
 
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+  
     if (file) {
-        // fileReader.onload = (e) => {
-        //     const csvOutput = e.target.result;
-        // };
-        fileReader.readAsText(file);
-
-        fileReader.onload = () => {
-          const csvData = fileReader.result;
-          const dataArray = csvData.split("\n").map((row) => row.split(","));
-          const input = dataArray[0].map((value) => parseFloat(value));
-          postData(input);
-          
-
-          const isFraudulent = detectFraud(input);
-          if (isFraudulent) {
-            resultDiv.innerText = "Potentially fraudulent behavior detected!";
-            resultDiv.style.color = "red";
-            resultDiv.style.fontFamily = "'Roboto Mono', monospace";
-            resultDiv.style.fontSize = "1.5em";
-          } else {
-            resultDiv.innerText = "No fraudulent behavior detected.";
-            resultDiv.style.color = "green";
-            resultDiv.style.fontFamily = "'Roboto Mono', monospace";
-            resultDiv.style.fontSize = "1.5em";
-          }
-
-        }
-
+      fileReader.onload = (e) => {
+        const csvData = e.target.result;
+        const dataArray = csvData.split("\n").map((row) => row.split(","));
+        console.log('array: ', dataArray);
+        const input = dataArray.map((value) => parseFloat(value));
+        postData(input);
+  
+        axios.get('/results')
+          .then((response) => {
+            const isFraudulent = detectFraud(input);
+  
+            if (isFraudulent) {
+              resultDiv.innerText = "Potentially fraudulent behavior detected!";
+              resultDiv.style.color = "red";
+              resultDiv.style.fontFamily = "'Roboto Mono', monospace";
+              resultDiv.style.fontSize = "1.5em";
+            } else {
+              resultDiv.innerText = "No fraudulent behavior detected.";
+              resultDiv.style.color = "green";
+              resultDiv.style.fontFamily = "'Roboto Mono', monospace";
+              resultDiv.style.fontSize = "1.5em";
+            }
+  
+            setResult(response);
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+  
+      fileReader.readAsText(file);
     }
   };
+  
 
   return (
     <>
@@ -74,7 +81,7 @@ const FileUpload = () => {
         <input type={"file"} id={"csv-file"} accept={".csv"} onChange={onChange} />
         <button onSubmit={ (e) => onSubmit(e)} type="submit" id="submit-btn">Submit</button>
       </form>
-      <div id="result"></div>
+        <div id="result"> {result ? result : null} </div>
     </>
   );
 

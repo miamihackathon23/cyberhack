@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 #load data set to data frame 
-cc_data = pd.read_csv("/Users/sofianadramia/hackathon/hackathon/cyberhack/TrainingData2.2.csv")
+cc_data = pd.read_csv("C:\\Users\\pinak\\Documents\\Projects\\CyberVigilante\\TrainingData2.2.csv")
 
 print(cc_data.head())\
 

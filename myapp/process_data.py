@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-from .train import m
+from myapp import train as m
 
 # load the trained model
 m.model.fit(m.X_train, m.Y_train)
