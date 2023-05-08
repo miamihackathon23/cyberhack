@@ -13,24 +13,25 @@ m.model.fit(m.X_train, m.Y_train)
 app = Flask(__name__)
 
 # create an API endpoint
-@app.route('/result', methods=['GET'])
-
-def get_results(): 
-    output = detect_fraud()
-    return output
 
 @app.route('/detect_fraud', methods=['POST'])
 def detect_fraud():
     # get the input data from the request
     # input_data = request.json['input']
     input_data = pd.read_csv['input']
-    
+
     # process the input data using the model
     input_arr = np.array(input_data).reshape(1, -1)
     output = m.model.predict(input_arr)[0]
-    
+
     # return the output as a JSON response
     return jsonify({'output': output})
+
+@app.route('/result', methods=['GET'])
+
+def get_results():
+    output = detect_fraud()
+    return output
 
 # start the Flask app
 if __name__ == '__main__':
